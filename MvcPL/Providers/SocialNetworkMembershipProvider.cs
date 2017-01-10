@@ -8,7 +8,7 @@ using System.Web.Security;
 using BLL.Interface.Entities;
 using BLL.Interface.Services;
 using CryptoService.Interface;
-using SocialNetwork.ViewModels;
+using MvcPL.ViewModels;
 
 namespace MvcPL.Providers
 {

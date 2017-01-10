@@ -8,9 +8,11 @@ namespace MvcPL.Controllers
 {
     public class ProfileController:Controller
     {
+
+        [Authorize]
         public ActionResult Home()
         {
-           throw new NotImplementedException();
+            return View();
         }
     }
 }

@@ -53,5 +53,20 @@ namespace BLL.Mappers
             return result;
         }
 
+        /// <summary>
+        /// Map Users
+        /// </summary>
+        /// <param name="users"></param>
+        /// <returns>new BllUsers collection same as users</returns>
+        public static IEnumerable<BllUser> Map(IEnumerable<DalUser> users)
+        {
+            var bllUsers = new List<BllUser>();
+            foreach (var item in users)
+            {
+                bllUsers.Add(item.ToBllUser());
+            }
+            return bllUsers;
+        }
+
     }
 }

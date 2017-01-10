@@ -7,10 +7,11 @@ using System.Web.Mvc;
 using System.Web.Security;
 using BLL.Interface.Services;
 using MvcPL.Providers;
-using SocialNetwork.ViewModels;
+using MvcPL.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MvcPL.Providers;
+
 namespace MvcPL.Controllers
 {
     public class AccountController : Controller
@@ -22,11 +23,44 @@ namespace MvcPL.Controllers
             userService = us;
         }
 
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginModel viewModel, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Membership.ValidateUser(viewModel.Email, viewModel.Password))
+                {
+                    FormsAuthentication.SetAuthCookie(viewModel.Email, false);
+                    FormsAuthentication.SetAuthCookie(viewModel.Email, viewModel.RememberMe);
+                    //Управляет службами проверки подлинности с помощью форм для веб-приложений
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Home", "Profile");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Incorrect login or password.");
+                }
+            }
+            return View(viewModel);
+        }
+
+
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -35,8 +69,9 @@ namespace MvcPL.Controllers
             return View();
         }
         
-        
+        [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
 
@@ -67,7 +102,7 @@ namespace MvcPL.Controllers
                 if (membershipUser != null)
                 {
                     FormsAuthentication.SetAuthCookie(model.Email, true);
-                    return RedirectToAction("Home", "Profile");
+                    return RedirectToAction("Login", "Account");
                 }
                 else
                 {

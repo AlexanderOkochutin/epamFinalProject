@@ -14,7 +14,7 @@ namespace BLL.Services
     {
         private readonly IUnitOfWork uow;
 
-        public UserService(IUnitOfWork unitOfWork, IUserRepository repository)
+        public UserService(IUnitOfWork unitOfWork)
         {
             uow = unitOfWork;
         }

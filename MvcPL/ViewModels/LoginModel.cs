@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SocialNetwork.ViewModels
+namespace MvcPL.ViewModels
 {
     public class LoginModel
     {
@@ -13,5 +13,8 @@ namespace SocialNetwork.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+        [Display(Name = "Remember password?")]
+        public bool RememberMe { get; set; }
     }
 } 

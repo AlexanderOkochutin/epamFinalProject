@@ -36,7 +36,7 @@ namespace DAL
         /// <param name="dalUser"></param>
         public void Create(DalUser dalUser)
         {
-            var user = UserMapper.Map(dalUser);
+            var user = dalUser.ToUser();
 
             foreach (var role in dalUser.Roles)
             {
@@ -84,7 +84,7 @@ namespace DAL
         /// <returns>DalUser</returns>
         public DalUser Get(int id)
         {
-            return UserMapper.Map(users.FirstOrDefault(u => u.Id == id));
+            return users.FirstOrDefault(u => u.Id == id).ToDalUser();
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace DAL
 
         public DalUser GetByEmail(string email)
         {
-            return UserMapper.Map(users.FirstOrDefault(u => u.Email == email));
+            return users.FirstOrDefault(u => u.Email == email).ToDalUser();
         }
     }
 }

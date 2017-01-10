@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SocialNetwork.ViewModels
+namespace MvcPL.ViewModels
 {
     public class RegisterModel
     {
