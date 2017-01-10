@@ -31,6 +31,8 @@ namespace BLL.Interface.Entities
         /// </summary>
         public string Email { get; set; }
 
+        public bool IsEmailConfirmed { get; set; }
+
         /// <summary>
         /// BLL User hashed password
         /// </summary>

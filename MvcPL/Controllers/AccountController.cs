@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -39,7 +40,6 @@ namespace MvcPL.Controllers
             {
                 if (Membership.ValidateUser(viewModel.Email, viewModel.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(viewModel.Email, false);
                     FormsAuthentication.SetAuthCookie(viewModel.Email, viewModel.RememberMe);
                     //Управляет службами проверки подлинности с помощью форм для веб-приложений
                     if (Url.IsLocalUrl(returnUrl))
@@ -96,13 +96,15 @@ namespace MvcPL.Controllers
             }
             if (ModelState.IsValid)
             {
+                
                 var membershipUser = ((SocialNetworkMembershipProvider)Membership.Provider)
                     .CreateUser(model);
 
+                MailConfirmation(model.Email);
+
                 if (membershipUser != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.Email, true);
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("Confirm", "Account");
                 }
                 else
                 {
@@ -111,5 +113,48 @@ namespace MvcPL.Controllers
             }
             return View(model);
         }
+
+
+        [AllowAnonymous]
+        public ActionResult Confirm()
+        {
+            ViewBag.Message = "check your email to complete your registration";
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult ConfirmEmail(string Email)
+        {
+            if (!userService.GetUserByEmail(Email).IsEmailConfirmed)
+            {
+                userService.MailConfirm(Email);
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
+        private void MailConfirmation(string email)
+        {
+            // наш email с заголовком письма
+            MailAddress from = new MailAddress("f-society@mail.com", "Web Registration");
+            // кому отправляем
+            MailAddress to = new MailAddress(email);
+            // создаем объект сообщения
+            MailMessage m = new MailMessage(from, to);
+            // тема письма
+            m.Subject = "Email confirmation";
+            // текст письма - включаем в него ссылку
+            m.Body = string.Format("To complete registration go to this link:" +
+                            "<a href=\"{0}\" title=\"Confirm registration\">{0}</a>",
+                Url.Action("ConfirmEmail", "Account", new {Email = email }, Request.Url.Scheme));
+            m.IsBodyHtml = true;
+            // адрес smtp-сервера, с которого мы и будем отправлять письмо
+            SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
+            // логин и пароль
+            smtp.EnableSsl = true;
+            smtp.Credentials = new System.Net.NetworkCredential("okochutinwork@gmail.com", "GooOko331650");
+            smtp.Send(m);
+        }
+
     }
 }

@@ -27,7 +27,8 @@ namespace DAL.Mappers
                 Email = user.Email,
                 Login = user.Login,
                 Password = user.Password,
-                PasswordSalt = user.PasswordSalt
+                PasswordSalt = user.PasswordSalt,
+                IsEmailConfirmed = user.IsEmailConfirmed
             };
 
             return result;
@@ -47,7 +48,8 @@ namespace DAL.Mappers
                 Email = user.Email,
                 Login = user.Login,
                 Password = user.Password,
-                PasswordSalt = user.PasswordSalt
+                PasswordSalt = user.PasswordSalt,
+                IsEmailConfirmed = user.IsEmailConfirmed
             };
 
             foreach (var role in user.Roles)

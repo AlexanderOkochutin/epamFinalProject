@@ -58,6 +58,7 @@ namespace DAL
             {
                 user.Login = dalUser.Login;
                 user.Email = dalUser.Email;
+                user.IsEmailConfirmed = dalUser.IsEmailConfirmed;
                 user.Roles.Clear();
                 foreach (var item in dalUser.Roles)
                 {

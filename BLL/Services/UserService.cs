@@ -56,5 +56,12 @@ namespace BLL.Services
             uow.Users.Update(user.ToDalUser());
             uow.Commit();
         }
+
+        public void MailConfirm(string email)
+        {
+            var user = uow.Users.GetByEmail(email);
+            user.IsEmailConfirmed = true;
+            UpdateUser(user.ToBllUser());
+        }
     }
 }

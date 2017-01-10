@@ -35,6 +35,7 @@ namespace MvcPL.Providers
                    Login = viewModel.Email,
                    PasswordSalt = salt,
                    Password = PasswordService.GetHash(viewModel.Password,salt),
+                   IsEmailConfirmed = false,
                    Roles = new List<string>() { "User"}
             };
             

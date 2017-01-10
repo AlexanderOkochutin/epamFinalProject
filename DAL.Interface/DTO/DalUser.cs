@@ -33,6 +33,8 @@ namespace DAL.Interface.DTO
         /// </summary>
         public string Email { get; set; }
 
+        public bool IsEmailConfirmed { get; set; }
+
         /// <summary>
         /// DAL User hashed password
         /// </summary>

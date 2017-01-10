@@ -26,7 +26,8 @@ namespace BLL.Mappers
                 Login = user.Login,
                 Password = user.Password,
                 PasswordSalt = user.PasswordSalt,
-                Roles = user.Roles
+                Roles = user.Roles,
+                IsEmailConfirmed = user.IsEmailConfirmed
             };
 
             return result;
@@ -47,7 +48,8 @@ namespace BLL.Mappers
                 Login = user.Login,
                 Password = user.Password,
                 PasswordSalt = user.PasswordSalt,
-                Roles = user.Roles
+                Roles = user.Roles,
+                IsEmailConfirmed = user.IsEmailConfirmed
             };
 
             return result;

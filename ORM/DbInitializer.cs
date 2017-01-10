@@ -32,6 +32,7 @@ namespace ORM
             {
                 Id = 1,
                 Email = "okochutinwork@gmail.com",
+                IsEmailConfirmed = true,
                 Login = "admin",
                 PasswordSalt = passService.GetSalt()
             };

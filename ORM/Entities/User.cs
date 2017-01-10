@@ -35,6 +35,8 @@ namespace ORM
         /// </summary>
         public string Email { get; set; }
 
+        public bool IsEmailConfirmed { get; set; }
+
         /// <summary>
         /// User hashed password
         /// </summary>
