@@ -280,6 +280,14 @@
       <Project>{04f407d0-5da7-4f6a-b4f1-64c92cf634b6}</Project>
       <Name>BLL.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CryptoService.Interface\CryptoService.Interface.csproj">
+      <Project>{b8fbf579-861c-46a1-982c-f87c466aeb72}</Project>
+      <Name>CryptoService.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CryptoService\CryptoService.csproj">
+      <Project>{675c409f-f471-4fae-b5d0-69f27bc27df1}</Project>
+      <Name>CryptoService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DependencyResolver\DependencyResolver.csproj">
       <Project>{9a88d7bd-06e4-4fc0-acba-30e4c62cf8d4}</Project>
       <Name>DependencyResolver</Name>

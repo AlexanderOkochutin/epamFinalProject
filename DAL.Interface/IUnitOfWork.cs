@@ -8,6 +8,10 @@ namespace DAL.Interface
 {
     public interface IUnitOfWork : IDisposable
     {
+        /// <summary>
+        /// User collection
+        /// </summary>
+        IUserRepository Users { get; set; }
         void Commit();
         //Rollback
     }

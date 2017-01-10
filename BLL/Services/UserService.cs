@@ -13,51 +13,47 @@ namespace BLL.Services
     public class UserService : IUserService
     {
         private readonly IUnitOfWork uow;
-        private readonly IUserRepository userRepository;
 
         public UserService(IUnitOfWork unitOfWork, IUserRepository repository)
         {
             uow = unitOfWork;
-            userRepository = repository;
         }
 
         public void AddUser(BllUser user)
         {
-            userRepository.Create(user.ToDalUser());
+            uow.Users.Create(user.ToDalUser());
             uow.Commit();
         }
 
         public void DeleteUser(BllUser user)
         {
-            userRepository.Delete(user.ToDalUser());
+            uow.Users.Delete(user.Id);
             uow.Commit();
         }
 
         public BllUser GetUser(int key)
         {
-            return userRepository.GetById(key).ToBllUser();
+            return uow.Users.Get(key).ToBllUser();
         }
 
         public BllUser GetUserByEmail(string email)
         {
-            return userRepository.GetByEmail(email).ToBllUser();
+            return uow.Users.GetByEmail(email).ToBllUser();
         }
 
         public List<BllUser> GetUsers()
         {
-            return userRepository.GetAll().Select(user=>user.ToBllUser()).ToList();
+            return uow.Users.GetAll().Select(user=>user.ToBllUser()).ToList();
         }
 
         public IEnumerable<BllUser> Search(string search)
         {
-            var s = search ?? "";
-            s = s.ToLower();
-            return userRepository.GetByPredicate(u => (u.Email.ToLower() + " " + u.Login.ToLower()).Contains(s)).Select(u=>u.ToBllUser());
+           throw new NotImplementedException();
         }
 
         public void UpdateUser(BllUser user)
         {
-            userRepository.Update(user.ToDalUser());
+            uow.Users.Update(user.ToDalUser());
             uow.Commit();
         }
     }

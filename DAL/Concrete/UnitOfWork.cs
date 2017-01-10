@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Interface;
+using ORM;
 
 namespace DAL.Concrete
 {
@@ -13,9 +14,12 @@ namespace DAL.Concrete
 
         public DbContext Context { get; private set; }
 
+        public IUserRepository Users { get; set; }
+
         public UnitOfWork(DbContext context)
         {
             Context = context;
+            Users = new UserRepository((SocialNetworkContext)context);
         }
 
         public void Commit()

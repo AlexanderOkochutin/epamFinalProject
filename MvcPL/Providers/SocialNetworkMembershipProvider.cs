@@ -1,21 +1,24 @@
 ﻿using BLL.Interface;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
+using BLL.Interface.Entities;
 using BLL.Interface.Services;
+using CryptoService.Interface;
 using SocialNetwork.ViewModels;
 
-namespace SocialNetwork.Providers
+namespace MvcPL.Providers
 {
-    public class SocailNetworkMembershipProvider : MembershipProvider
+    public class SocialNetworkMembershipProvider : MembershipProvider
     {
-        public IUserService UserService
-            => (IUserService)DependencyResolver.Current.GetService(typeof(IUserService));
+        public IPasswordService PasswordService
+         => (IPasswordService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IPasswordService));
 
-        public IRoleService RoleService
-            => (IRoleService)DependencyResolver.Current.GetService(typeof(IRoleService));
+        public IUserService UserService
+            => (IUserService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IUserService));
 
         public MembershipUser CreateUser(RegisterModel viewModel)//string email, string password
         {
@@ -25,20 +28,16 @@ namespace SocialNetwork.Providers
             {
                 return null;
             }
-
-            var user = new User
+            var salt = PasswordService.GetSalt();
+            var user = new BllUser
             {
-                UserName = viewModel.FirstName,
-                UserSurname = viewModel.LastName,
-                UserEmail = viewModel.Email,
-                UserPassword = Crypto.HashPassword(viewModel.Password),
-                UserBirthDate = viewModel.Birthday,
+                   Email = viewModel.Email,
+                   Login = viewModel.Email,
+                   PasswordSalt = salt,
+                   Password = PasswordService.GetHash(viewModel.Password,salt),
+                   Roles = new List<string>() { "User"}
             };
-            var role = RoleService.GetAllRoles().FirstOrDefault(r => r.RoleName == "user");
-            if (role != null)
-            {
-                user.Roles.Add(role);
-            }
+            
             UserService.AddUser(user);
             membershipUser = GetUser(viewModel.Email, false);
             return membershipUser;
@@ -48,7 +47,7 @@ namespace SocialNetwork.Providers
         {
             var user = UserService.GetUserByEmail(email);
 
-            if (user != null && Crypto.VerifyHashedPassword(user.UserPassword, password))
+            if (user != null && PasswordService.VerifyPassword(password, user.PasswordSalt, user.PasswordSalt)) ;
             //Определяет, соответствуют ли заданный хэш RFC 2898 и пароль друг другу
             {
                 return true;
@@ -62,7 +61,7 @@ namespace SocialNetwork.Providers
 
             if (user == null) return null;
 
-            var memberUser = new MembershipUser("SocailNetworkMembershipProvider", user.UserEmail,
+            var memberUser = new MembershipUser("SocialNetworkMembershipProvider", user.Email,
                 null, null, null, null,
                 false, false, DateTime.MinValue,
                 DateTime.MinValue, DateTime.MinValue,

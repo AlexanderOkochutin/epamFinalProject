@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ORM.Entities;
 
 namespace ORM
 {
@@ -11,14 +10,14 @@ namespace ORM
     /// <summary>
     /// ORM Layout User class
     /// </summary>
-    public class DalUser:IEntity
+    public class User
     {
         /// <summary>
         /// Create ORM User ENtity
         /// </summary>
-        public DalUser()
+        public User()
         {
-            Roles = new List<DalRole>();
+            Roles = new List<Role>();
         }
 
         /// <summary>
@@ -49,6 +48,6 @@ namespace ORM
         /// <summary>
         /// User Roles. It need for DataBase creating
         /// </summary>
-        public virtual ICollection<DalRole> Roles { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }

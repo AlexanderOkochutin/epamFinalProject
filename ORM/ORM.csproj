@@ -50,10 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbInitializer.cs" />
-    <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\DalRole.cs" />
-    <Compile Include="Entities\DalUser.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="SocialNetworkContext.cs" />
   </ItemGroup>
   <ItemGroup>

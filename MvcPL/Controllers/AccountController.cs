@@ -6,10 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using BLL.Interface.Services;
+using MvcPL.Providers;
 using SocialNetwork.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using MvcPL.Providers;
 namespace MvcPL.Controllers
 {
     public class AccountController : Controller
@@ -47,11 +48,11 @@ namespace MvcPL.Controllers
                     $"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={response}");
             var obj = JObject.Parse(result);
             var status = (bool) obj.SelectToken("success");
-            if (!status)
+            /*if (!status)
             {
                 ModelState.AddModelError("", "captcha failed");
                 return View(model);
-            }
+            }*/
             var anyUser = userService.GetUsers().Any(u => u.Email == model.Email);
             if (anyUser)
             {
@@ -60,7 +61,7 @@ namespace MvcPL.Controllers
             }
             if (ModelState.IsValid)
             {
-                var membershipUser = ((SocailNetworkMembershipProvider)Membership.Provider)
+                var membershipUser = ((SocialNetworkMembershipProvider)Membership.Provider)
                     .CreateUser(model);
 
                 if (membershipUser != null)
@@ -73,6 +74,7 @@ namespace MvcPL.Controllers
                     ModelState.AddModelError("", "Error registration.");
                 }
             }
+            return View(model);
         }
     }
 }

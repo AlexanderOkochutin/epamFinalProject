@@ -9,24 +9,26 @@ using CryptoService.Interface;
 
 namespace ORM
 {
-    public class DbInitializer:DropCreateDatabaseIfModelChanges<SocialNetworkContext>
+    public class DbInitializer:CreateDatabaseIfNotExists<SocialNetworkContext>
     {
 
         private readonly IPasswordService passService;
 
         public DbInitializer(IPasswordService passwordService)
         {
-            passService = passwordService;
+            passService = passwordService;      
+             
         }
 
         protected override void Seed(SocialNetworkContext context)
         {
-            context.Roles.AddRange(new DalRole[]
+            context.Roles.AddRange(new Role[]
             {
-                new DalRole() {Id = 1, Name = "Administrator"},
-                new DalRole() {Id = 2, Name = "User"}
+                new Role() {Id = 1, Name = "Administrator"},
+                new Role() {Id = 2, Name = "User"}
             });
-            DalUser admin = new DalUser()
+            context.SaveChanges();
+            User admin = new User()
             {
                 Id = 1,
                 Email = "okochutinwork@gmail.com",
@@ -34,12 +36,12 @@ namespace ORM
                 PasswordSalt = passService.GetSalt()
             };
             admin.Password = passService.GetHash("123456", admin.PasswordSalt);
-            var adminRoles = context.Set<DalRole>().Select(r => r);
+            var adminRoles = context.Set<Role>().Select(r => r);
             foreach (var role in adminRoles)
             {
                 admin.Roles.Add(role);
             }
-            context.Set<DalUser>().Add(admin);
+            context.Set<User>().Add(admin);
             context.SaveChanges();
         }
 

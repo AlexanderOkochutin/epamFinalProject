@@ -4,13 +4,17 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CryptoService.Interface;
 
 namespace ORM
 {
     public class SocialNetworkContext:DbContext
     {
-        public SocialNetworkContext() : base("SocialNetworkContext") { }
-        public DbSet<DalUser> Users;
-        public DbSet<DalRole> Roles;
+        public SocialNetworkContext(IPasswordService passwordService) : base("SocialNetworkContext")
+        {
+            Database.SetInitializer(new DbInitializer(passwordService));
+        }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
 }

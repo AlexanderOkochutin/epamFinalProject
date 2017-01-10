@@ -4,27 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.Interface.Entities;
+using DAL.Interface.DTO;
 using ORM;
 
 namespace BLL.Mappers
 {
     static class UserMapper
     {
-        public static DalUser ToDalUser(this BllUser user)
-        {
-            if (ReferenceEquals(user, null)) return null;
-            DalUser result = new DalUser
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Login = user.Login,
-                Password = user.Password,
-                PasswordSalt = user.PasswordSalt
-            };
-
-            return result;
-        }
-
+        /// <summary>
+        /// Map User
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>new BllUser same as user</returns>
         public static BllUser ToBllUser(this DalUser user)
         {
             if (ReferenceEquals(user, null)) return null;
@@ -34,15 +25,33 @@ namespace BLL.Mappers
                 Email = user.Email,
                 Login = user.Login,
                 Password = user.Password,
-                PasswordSalt = user.PasswordSalt
+                PasswordSalt = user.PasswordSalt,
+                Roles = user.Roles
             };
-
-            foreach (var role in user.Roles)
-            {
-                result.Roles.Add(role.Name);
-            }
 
             return result;
         }
+
+        /// <summary>
+        /// Map User
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>new DalUser same as user</returns>
+        public static DalUser ToDalUser(this BllUser user)
+        {
+            if (ReferenceEquals(user, null)) return null;
+            DalUser result = new DalUser
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Login = user.Login,
+                Password = user.Password,
+                PasswordSalt = user.PasswordSalt,
+                Roles = user.Roles
+            };
+
+            return result;
+        }
+
     }
 }

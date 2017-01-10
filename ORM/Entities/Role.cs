@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ORM.Entities;
 
 namespace ORM
 {
     /// <summary>
     /// ORM Layout Role class
     /// </summary>
-    public class DalRole: IEntity
+    public class Role
     {
         /// <summary>
         /// Create ORM Role entity
         /// </summary>
-        public DalRole()
+        public Role()
         {
-            Users = new List<DalUser>();
+            Users = new List<User>();
         }
 
         /// <summary>
@@ -33,6 +32,6 @@ namespace ORM
         /// <summary>
         /// All ORM users, whose have the role. It need for DataBase creating
         /// </summary>
-        public virtual ICollection<DalUser> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

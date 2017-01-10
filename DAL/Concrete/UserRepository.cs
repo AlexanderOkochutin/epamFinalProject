@@ -1,58 +1,114 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using DAL.Interface;
+using DAL.Mappers;
 using ORM;
+using System.Data.Entity;
+using DAL.Interface.DTO;
 
-namespace DAL.Concrete
+namespace DAL
 {
+    /// <summary>
+    /// User repository class implements Repository pattern for user collection
+    /// </summary>
     public class UserRepository : IUserRepository
     {
-        private DbContext context;
+        private readonly SocialNetworkContext context;
+        private readonly DbSet<User> users;
+        private readonly DbSet<Role> roles;
 
-        public UserRepository(DbContext context)
+        /// <summary>
+        /// Create new UserRepository instance
+        /// </summary>
+        /// <param name="knowledgeContext"></param>
+        public UserRepository(SocialNetworkContext socialNetworkContext)
         {
-            this.context = context;
+            context = socialNetworkContext;
+            users = context.Set<User>();
+            roles = context.Set<Role>();
         }
 
+        /// <summary>
+        /// The method for creating new user entity in collection
+        /// </summary>
+        /// <param name="dalUser"></param>
         public void Create(DalUser dalUser)
         {
-            context.Set<DalUser>().Add(dalUser);
+            var user = UserMapper.Map(dalUser);
+
+            foreach (var role in dalUser.Roles)
+            {
+                var userRole = roles.FirstOrDefault(r => r.Name == role);
+                user.Roles.Add(userRole);
+            }
+
+            users.Add(user);
         }
 
-        public void Delete(DalUser dalUser)
+        /// <summary>
+        /// The method for updating exsisting user in collection
+        /// </summary>
+        /// <param name="dalUser"></param>
+        public void Update(DalUser dalUser)
         {
-            context.Set<DalUser>().Remove(dalUser);
+            var user = users.FirstOrDefault(u => u.Id == dalUser.Id);
+            if (!ReferenceEquals(user, null))
+            {
+                user.Login = dalUser.Login;
+                user.Email = dalUser.Email;
+                user.Roles.Clear();
+                foreach (var item in dalUser.Roles)
+                {
+                    var userRole = roles.FirstOrDefault(r => r.Name == item);
+                    user.Roles.Add(userRole);
+                }
+                context.Entry(user).State = EntityState.Modified;
+            }
         }
 
+        /// <summary>
+        /// The method for deleting user from collection
+        /// </summary>
+        /// <param name="id"></param>
+        public void Delete(int id)
+        {
+            users.Remove(users.FirstOrDefault(u => u.Id == id));
+        }
+
+        /// <summary>
+        /// The method for getting user entity by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>DalUser</returns>
+        public DalUser Get(int id)
+        {
+            return UserMapper.Map(users.FirstOrDefault(u => u.Id == id));
+        }
+
+        /// <summary>
+        /// The method for getting all users
+        /// </summary>
+        /// <returns>DalUser collection</returns>
         public IEnumerable<DalUser> GetAll()
         {
-            return context.Set<DalUser>().ToList();
+            return UserMapper.Map(users.Include(u => u.Roles).Select(u => u));
+        }
+
+        /// <summary>
+        /// The method for getting user entity by predicate
+        /// </summary>
+        /// <param name="f"></param>
+        /// <returns>DalUser</returns>
+        public DalUser GetByPredicate(Expression<Func<DalUser, bool>> f)
+        {
+           throw new NotImplementedException();
         }
 
         public DalUser GetByEmail(string email)
         {
-            return context.Set<DalUser>().FirstOrDefault(u => u.Email==email);
-        }
-
-        public DalUser GetById(int key)
-        {
-            return context.Set<DalUser>().Find(key);
-        }
-
-        public IEnumerable<DalUser> GetByPredicate(Expression<Func<DalUser, bool>> predicate)
-        {
-            return context.Set<DalUser>().Where(predicate);
-        }
-
-        public void Update(DalUser dalUser)
-        {
-            var oldUser = GetById(dalUser.Id);
-            context.Entry(oldUser).CurrentValues.SetValues(dalUser);
+            return UserMapper.Map(users.FirstOrDefault(u => u.Email == email));
         }
     }
 }
