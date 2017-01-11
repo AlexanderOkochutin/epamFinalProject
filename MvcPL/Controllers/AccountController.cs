@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -31,6 +32,7 @@ namespace MvcPL.Controllers
             return View();
         }
 
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -48,7 +50,7 @@ namespace MvcPL.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Home", "Profile");
+                        return RedirectToAction("ComingSoon", "Profile");
                     }
                 }
                 else
@@ -60,7 +62,11 @@ namespace MvcPL.Controllers
         }
 
 
-
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account");
+        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -83,11 +89,11 @@ namespace MvcPL.Controllers
                     $"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={response}");
             var obj = JObject.Parse(result);
             var status = (bool) obj.SelectToken("success");
-            /*if (!status)
+            if (!status)
             {
                 ModelState.AddModelError("", "captcha failed");
                 return View(model);
-            }*/
+            }
             var anyUser = userService.GetUsers().Any(u => u.Email == model.Email);
             if (anyUser)
             {
@@ -123,8 +129,9 @@ namespace MvcPL.Controllers
         }
 
 
+        //ПРОДУМАТЬ ЗАЩИТУ ОТ ПЕРЕХОДА НА ЭТУ ССЫЛКУ
         [AllowAnonymous]
-        public ActionResult ConfirmEmail(string Email)
+        public async Task<ActionResult> ConfirmEmail(string Email)
         {
             if (!userService.GetUserByEmail(Email).IsEmailConfirmed)
             {

@@ -28,8 +28,7 @@ namespace MvcPL
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
-                "~/Scripts/jquery-ui-1.12.1.js",
-                "~/Scripts/Site.js"));
+                "~/Scripts/jquery-ui-1.12.1.js"));
         }
     }
 }

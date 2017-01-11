@@ -53,7 +53,6 @@ namespace MvcPL.Providers
             {
                 return true;
             }
-            return false;
         }
 
         public override MembershipUser GetUser(string email, bool userIsOnline)

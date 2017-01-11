@@ -8,13 +8,15 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("F-SOCIETY", "Home", "Profile", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            @Html.ActionLink("F-SOCIETY", "Home", "Profile", new {area = ""}, new {@class = "navbar-brand"})   
         </div>
+        <div class="navbar-right" >@Html.ActionLink("Log out", "LogOut", "Account", new { area = "" }, new { @class = "navbar-brand" })  </div>
     </div>
+              
+</div>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -26,7 +28,6 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jquery-ui")
     @RenderSection("scripts", required: false)
 </body>
 </html>

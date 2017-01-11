@@ -14,5 +14,11 @@ namespace MvcPL.Controllers
         {
             return View();
         }
+
+        [Authorize]
+        public ActionResult ComingSoon()
+        {
+            return View();
+        }
     }
 }

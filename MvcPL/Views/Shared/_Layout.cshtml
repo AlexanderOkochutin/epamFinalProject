@@ -4,29 +4,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("F-SOCIETY", "Home", "Profile", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer class="footer">
-            <div class="container">
-                <p class="text-muted">Friends Society &copy; @DateTime.Now.Year</p>
-            </div>
-        </footer>
-    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jquery-ui")
-    @RenderSection("scripts", required: false)
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            @Html.ActionLink("F-SOCIETY", "Home", "Profile", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Friends Society &copy; @DateTime.Now.Year</p>
+        </div>
+    </footer>
+</div>
+@RenderSection("scripts", required: false)
 </body>
 </html>
