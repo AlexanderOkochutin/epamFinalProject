@@ -10,9 +10,8 @@ using System.Web.Security;
 using BLL.Interface.Services;
 using MvcPL.Providers;
 using MvcPL.ViewModels;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using MvcPL.Providers;
+
 
 namespace MvcPL.Controllers
 {
@@ -131,7 +130,7 @@ namespace MvcPL.Controllers
 
         //ПРОДУМАТЬ ЗАЩИТУ ОТ ПЕРЕХОДА НА ЭТУ ССЫЛКУ
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string Email)
+        public ActionResult ConfirmEmail(string Email)
         {
             if (!userService.GetUserByEmail(Email).IsEmailConfirmed)
             {
@@ -139,6 +138,7 @@ namespace MvcPL.Controllers
             }
             return RedirectToAction("Login", "Account");
         }
+
 
         private void MailConfirmation(string email)
         {

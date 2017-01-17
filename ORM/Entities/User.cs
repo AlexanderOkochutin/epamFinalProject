@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ORM.Entities;
 
 namespace ORM
 {
@@ -51,5 +52,7 @@ namespace ORM
         /// User Roles. It need for DataBase creating
         /// </summary>
         public virtual ICollection<Role> Roles { get; set; }
+
+        public virtual  Profile Profile { get; set; }
     }
 }

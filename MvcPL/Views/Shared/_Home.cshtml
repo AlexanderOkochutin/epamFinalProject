@@ -8,26 +8,34 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            @Html.ActionLink("F-SOCIETY", "Home", "Profile", new {area = ""}, new {@class = "navbar-brand"})   
-        </div>
-        <div class="navbar-right" >@Html.ActionLink("Log out", "LogOut", "Account", new { area = "" }, new { @class = "navbar-brand" })  </div>
-    </div>
-              
-</div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer class="footer">
+<div class="row">
+    <div class="col-md-12">
+        <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <p class="text-muted">Friends Society &copy; @DateTime.Now.Year</p>
+                <div class="navbar-header">
+                    @Html.ActionLink("F-SOCIETY", "Home", "Profile", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-right">@Html.ActionLink("Log out", "LogOut", "Account", new { area = "" }, new { @class = "navbar-brand" }) </div>
             </div>
-        </footer>
+        </div>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer class="footer">
+                <div class="container">
+                    <p class="text-muted">Friends Society &copy; @DateTime.Now.Year</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>

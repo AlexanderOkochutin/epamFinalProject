@@ -20,5 +20,35 @@ namespace MvcPL.Controllers
         {
             return View();
         }
+
+        [Authorize]
+        public ActionResult Message()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Authorize]
+        public ActionResult Edit()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Authorize]
+        public ActionResult Friends()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Authorize]
+        public ActionResult Photo()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Authorize]
+        public ActionResult ChangeAvatar()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

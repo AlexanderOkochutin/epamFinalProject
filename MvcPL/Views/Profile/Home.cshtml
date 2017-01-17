@@ -1,13 +1,62 @@
-﻿@{
-    ViewBag.Title = "Coming Soon";
+﻿@model  MvcPL.ViewModels.ProfileModel
+@{
     Layout = "~/Views/Shared/_Home.cshtml";
 }
 <style>
-    div {
-        font-size: large
+    .topMargin {
+        margin-top: 3%;
+    }
+    .status {
+        font-size: x-large;
     }
 </style>
-<h1 align="center">COMING SOON</h1>
-<p/>
-    <div align="center"/>profile message and friend system<div/>
-
+<div class="container-fluid topMargin">
+    <div class="row">
+        <div class="col-md-2">
+            <nav id="nav">
+                <ul>
+                    <li>@Html.ActionLink("Messages", "Message", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
+                    <li>@Html.ActionLink("Friends", "Friends", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
+                    <li>@Html.ActionLink("Photos", "Photo", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-3">
+            <img src="~/testImages/A8XSTcubxjQ.jpg" alt="avatar" class="img-rounded" width="250" height="250" />
+            <p/>
+            <div align="center">
+                @Html.ActionLink("Change Avatar", "ChangeAvatar", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-xs"})
+            </div>
+            <p/>
+            <div align="center">online</div>
+        </div>
+        <div class="col-md-7">
+            <div align="left">                
+                <div class="status">Alexander Okochutin</div>
+                <div>Настраиваем работу</div>
+                <div>Инфа</div>
+                @Html.ActionLink("Edit", "Edit", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-sm" })
+            </div>
+        </div>
+    </div>
+    
+    <div class="row topMargin">
+        <div class="col-md-2">           
+        </div>
+        <div class="col-md-3">
+            <div>Друзья</div>
+            <div>
+                <img src="~/testImages/543novrbKac.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+                <img src="~/testImages/A-Nn65MbX1c.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+                <img src="~/testImages/AKUKzxqvEkc.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+                <img src="~/testImages/BR7V8izRffg.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+                <img src="~/testImages/FFS4BxaIYGw.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div align="center">
+                <h1>Стена</h1>
+            </div>
+        </div>
+    </div>
+</div>

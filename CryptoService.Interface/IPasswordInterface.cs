@@ -15,7 +15,7 @@ namespace CryptoService.Interface
         /// Hashing key
         /// </summary>
         string GetSalt();
-
+        
         /// <summary>
         /// Get hashed password
         /// </summary>

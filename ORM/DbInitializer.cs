@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CryptoService.Interface;
+using ORM.Entities;
 
 
 namespace ORM
@@ -43,6 +44,13 @@ namespace ORM
                 admin.Roles.Add(role);
             }
             context.Set<User>().Add(admin);
+            Profile adminProfile = new Profile()
+            {
+                Id = admin.Id,
+                FirstName = "Alexander",
+                LastName = "Okochutin",
+                Gender = "Male"                
+            };
             context.SaveChanges();
         }
 

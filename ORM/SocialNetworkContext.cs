@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CryptoService.Interface;
+using ORM.Entities;
 
 namespace ORM
 {
@@ -16,5 +17,22 @@ namespace ORM
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Photo> Photos { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Profile>().HasRequired(t => t.User).WithOptional(u => u.Profile);
+            modelBuilder.Entity<Profile>()
+                .HasMany(c => c.Friends)
+                .WithMany(p => p.InFriends)
+                .Map(m =>
+                {
+                    m.ToTable("Friends");
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("User2Id");
+                });
+        }
     }
 }

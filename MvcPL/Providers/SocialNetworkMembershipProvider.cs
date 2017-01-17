@@ -48,11 +48,12 @@ namespace MvcPL.Providers
         {
             var user = UserService.GetUserByEmail(email);
 
-            if (user != null && PasswordService.VerifyPassword(password, user.PasswordSalt, user.PasswordSalt)) ;
+            if (user != null && PasswordService.VerifyPassword(password,user.PasswordSalt, user.Password))
             //Определяет, соответствуют ли заданный хэш RFC 2898 и пароль друг другу
             {
                 return true;
             }
+            return false;
         }
 
         public override MembershipUser GetUser(string email, bool userIsOnline)

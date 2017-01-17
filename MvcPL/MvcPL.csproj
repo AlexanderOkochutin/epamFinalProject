@@ -232,6 +232,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
@@ -250,6 +251,12 @@
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\_references.js" />
     <None Include="Views\Account\Confirm.cshtml" />
+    <Content Include="testImages\543novrbKac.jpg" />
+    <Content Include="testImages\A-Nn65MbX1c.jpg" />
+    <Content Include="testImages\A8XSTcubxjQ.jpg" />
+    <Content Include="testImages\AKUKzxqvEkc.jpg" />
+    <Content Include="testImages\BR7V8izRffg.jpg" />
+    <Content Include="testImages\FFS4BxaIYGw.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -259,7 +266,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -268,6 +277,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_Home.cshtml" />
     <Content Include="Views\Profile\ComingSoon.cshtml" />
+    <Content Include="Views\Shared\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
