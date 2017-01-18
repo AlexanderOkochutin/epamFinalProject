@@ -7,7 +7,7 @@ using DAL.Interface.DTO;
 
 namespace DAL.Interface
 {
-    public interface IProfileRepository:IRepository<DalProfile>
+    public interface IPhotoRepository:IRepository<DalPhoto>
     {
     }
 }

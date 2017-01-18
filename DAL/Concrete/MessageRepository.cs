@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Interface.DTO;
 
-namespace DAL.Interface
+namespace DAL.Concrete
 {
-    public interface IProfileRepository:IRepository<DalProfile>
+    public class MessageRepository
     {
     }
 }

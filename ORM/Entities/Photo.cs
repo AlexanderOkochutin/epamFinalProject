@@ -11,11 +11,12 @@ namespace ORM.Entities
         public Photo()
         {
             Date = DateTime.Now;
+            Profile = new HashSet<Profile>();
         }
         public int Id { get; set; }
         public byte[] Data { get; set; }
         public string MimeType { get; set; }
         public DateTime Date { get; set; }
-        public virtual Profile Profile { get; set; }
+        public virtual ICollection<Profile> Profile { get; set; }
     }
 }

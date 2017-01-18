@@ -45,6 +45,8 @@
     <Compile Include="DTO\DalProfile.cs" />
     <Compile Include="DTO\DalUser.cs" />
     <Compile Include="DTO\IEntity.cs" />
+    <Compile Include="IMessageRepository.cs" />
+    <Compile Include="IPhotoRepository.cs" />
     <Compile Include="IProfileRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />

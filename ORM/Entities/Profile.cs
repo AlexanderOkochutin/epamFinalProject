@@ -20,6 +20,8 @@ namespace ORM.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
+        public DateTime? BirthDay { get; set; }
+        public string RelationStatus { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Profile> Friends { get; set; }

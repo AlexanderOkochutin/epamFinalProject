@@ -49,7 +49,9 @@ namespace ORM
                 Id = admin.Id,
                 FirstName = "Alexander",
                 LastName = "Okochutin",
-                Gender = "Male"                
+                Gender = "Male",
+                BirthDay = new DateTime(1994,6,25),
+                RelationStatus = "Free"
             };
             context.SaveChanges();
         }

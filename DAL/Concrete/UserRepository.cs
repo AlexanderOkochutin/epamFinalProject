@@ -94,7 +94,7 @@ namespace DAL
         /// <returns>DalUser collection</returns>
         public IEnumerable<DalUser> GetAll()
         {
-            return UserMapper.Map(users.Include(u => u.Roles).Select(u => u));
+            return users.Include(u => u.Roles).Select(u => u).Map();
         }
 
         /// <summary>

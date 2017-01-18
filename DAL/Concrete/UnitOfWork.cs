@@ -15,11 +15,17 @@ namespace DAL.Concrete
         public DbContext Context { get; private set; }
 
         public IUserRepository Users { get; set; }
+        public IProfileRepository Profiles { get; set; }
+        public IPhotoRepository Photos { get; set; }
+        public IMessageRepository Messages { get; set; }
 
         public UnitOfWork(DbContext context)
         {
             Context = context;
             Users = new UserRepository((SocialNetworkContext)context);
+            Photos = new PhotoRepository((SocialNetworkContext) context);
+            Profiles = new ProfileRepository((SocialNetworkContext) context);
+            Messages = new MessageRepository((SocialNetworkContext) context);
         }
 
         public void Commit()
