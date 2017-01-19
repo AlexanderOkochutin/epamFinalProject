@@ -18,6 +18,7 @@ namespace DAL.Concrete
         public IProfileRepository Profiles { get; set; }
         public IPhotoRepository Photos { get; set; }
         public IMessageRepository Messages { get; set; }
+        public IInviteRepository Invites { get; set; }
 
         public UnitOfWork(DbContext context)
         {
@@ -26,6 +27,7 @@ namespace DAL.Concrete
             Photos = new PhotoRepository((SocialNetworkContext) context);
             Profiles = new ProfileRepository((SocialNetworkContext) context);
             Messages = new MessageRepository((SocialNetworkContext) context);
+            Invites = new InviteRepository((SocialNetworkContext)context);
         }
 
         public void Commit()

@@ -13,16 +13,21 @@ namespace MvcPL.Controllers
     public class ProfileController : Controller
     {
         private readonly IProfileService profileService;
+        private readonly IPhotoService photoService;
+        private readonly IUserService userService;
 
-        public ProfileController(IProfileService ps)
+        public ProfileController(IProfileService ps, IPhotoService phs, IUserService us)
         {
             profileService = ps;
+            photoService = phs;
+            userService = us;
         }
 
         [Authorize]
         public ActionResult Home()
         {
-            var profile = profileService.Get(1);
+            var user = userService.GetUserByEmail(HttpContext.User.Identity.Name);
+            var profile = profileService.Get(user.Id);
             return View(profile.ToViewProfileModel());
         }
 
@@ -39,9 +44,24 @@ namespace MvcPL.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public ActionResult Edit()
         {
-            throw new NotImplementedException();
+            var user = userService.GetUserByEmail(HttpContext.User.Identity.Name);
+            var profile = profileService.Get(user.Id);
+            return View(profile.ToViewProfileModel());
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(ProfileModel model,HttpPostedFileBase fileUpload)
+        {
+            if (ModelState.IsValid)
+            {
+                SetProfileImage(model,fileUpload);
+                profileService.Update(model.ToBllProfile());
+            }
+            return RedirectToAction("Home");
         }
 
         [Authorize]
@@ -62,15 +82,60 @@ namespace MvcPL.Controllers
             throw new NotImplementedException();
         }
 
-        private void SetProfileImage(PhotoModel photo, HttpPostedFileBase fileUpload)
+        private void SetProfileImage( ProfileModel model,HttpPostedFileBase fileUpload)
         {
+            var photo = new PhotoModel();
+
             if (!ReferenceEquals(fileUpload, null))
             {
+                var previousAvatar = photoService.GetAllPhotos(model.Id).FirstOrDefault(p => p.IsAvatar);
+                if (previousAvatar != null)
+                {
+                    previousAvatar.IsAvatar = false;
+                    photoService.UpdatePhoto(previousAvatar);
+                }
                 photo.Data = new byte[fileUpload.ContentLength];
                 fileUpload.InputStream.Read(photo.Data, 0, fileUpload.ContentLength);
                 photo.MimeType = fileUpload.ContentType;
+                photo.IsAvatar = true;
+                photo.ProfileId.Add(model.Id);
+                photoService.AddPhoto(photo.ToBllPhoto());
+                var avatar = photoService.GetAllPhotos(model.Id).FirstOrDefault(p => p.IsAvatar == true);
+                model.AvatarId = avatar.Id;
             }
-
+            else
+            {
+                model.AvatarId = 0;
+            }
         }
+
+        [AllowAnonymous]
+        public FileContentResult GetImage(int id)
+        {
+            var profile = profileService.Get(id);
+            if (profile != null)
+            {
+                var avatarId = profile.AvatarId;
+                
+                if (avatarId != 0)
+                {
+                    var photo = photoService.GetPhoto(avatarId);
+                    return File(photo.Data,photo.MimeType);
+                }
+                else
+                {
+                    return StandartImage();
+                }
+            }
+            return null;
+        }
+
+        private FileContentResult StandartImage()
+        {
+            string path = System.Web.HttpContext.Current.Server.MapPath("~/Content/default-avatar.jpg");
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, "image/jpg");
+        }
+
     }
 }

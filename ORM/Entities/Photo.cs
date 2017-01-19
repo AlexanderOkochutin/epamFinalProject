@@ -17,6 +17,7 @@ namespace ORM.Entities
         public byte[] Data { get; set; }
         public string MimeType { get; set; }
         public DateTime Date { get; set; }
+        public bool IsAvatar { get; set; }
         public virtual ICollection<Profile> Profile { get; set; }
     }
 }

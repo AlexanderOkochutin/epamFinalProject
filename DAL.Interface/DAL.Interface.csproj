@@ -40,11 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DalInvite.cs" />
     <Compile Include="DTO\DalMessage.cs" />
     <Compile Include="DTO\DalPhoto.cs" />
     <Compile Include="DTO\DalProfile.cs" />
     <Compile Include="DTO\DalUser.cs" />
     <Compile Include="DTO\IEntity.cs" />
+    <Compile Include="IInviteRepository.cs" />
     <Compile Include="IMessageRepository.cs" />
     <Compile Include="IPhotoRepository.cs" />
     <Compile Include="IProfileRepository.cs" />

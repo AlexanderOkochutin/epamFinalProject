@@ -3,15 +3,63 @@
     Layout = "~/Views/Shared/_Home.cshtml";
 }
 <style>
-    .topMargin {
-        margin-top: 3%;
+         .topMargin {
+             margin-top: 3%;
+         }
+        .status {
+            font-size: x-large;
+        }
+       .frame-square {
+      background: #00bc8c;;
+      border: 2px solid #000;
+      display: inline-block;
+      vertical-align: top;
+      padding: 5px;
+      width: 250px;
+      height: 250px;
+      margin-right: .5em;
+      margin-bottom: .3em;
     }
-    .status {
-        font-size: x-large;
+       .frame-round {
+      background: #00bc8c;;
+      border: 2px solid #000;
+      display: inline-block;
+      vertical-align: top;
+      padding: 2px;
+      width: 60px;
+      height: 60px;
+      margin-right: .5em;
+      margin-bottom: .3em;
+    }
+
+    .frame-round {
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .frame-round .crop {
+      border-radius: 50%;
+    }
+
+    .crop {
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .crop img {
+      display: block;
+      min-width: 100%;
+      min-height: 100%;
+      margin: auto;
+      position: absolute;
+      top: -100%;
+      right: -100%;
+      bottom: -100%;
+      left: -100%;
     }
 </style>
+
 <div class="container-fluid topMargin">
-    <div class="row">
+    <div class="row ">
         <div class="col-md-2">
             <nav id="nav">
                 <ul>
@@ -22,35 +70,58 @@
             </nav>
         </div>
         <div class="col-md-3">
-            <img src="~/images/default-avatar.jpg" alt="avatar" class="img-rounded" width="250" height="250" />
-            <p/>
             <div align="center">
-                @Html.ActionLink("Change Avatar", "ChangeAvatar", "Profile", null, htmlAttributes: new {@class = "btn btn-default btn-xs"})
+                <div class="frame-square img-rounded">
+                    <div class="crop">
+                        @Html.Partial("_ProfilePhoto", Model.Id)
+                    </div>
+                </div>
             </div>
-            <p/>
             <div align="center">@Model.RelationStatus</div>
         </div>
         <div class="col-md-7">
-            <div align="left">                
-                <div class="status">@(@Model.LastName+@Model.LastName)</div>
+            <div align="left">
+                <div class="status">@(@Model.LastName + @Model.FirstName)</div>
                 <div>@Model.BirthDay</div>
                 <div>@Model.Gender</div>
                 @Html.ActionLink("Edit", "Edit", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-sm" })
             </div>
         </div>
     </div>
+</div>
     
     <div class="row topMargin">
         <div class="col-md-2">           
         </div>
         <div class="col-md-3">
             <div>Друзья</div>
-            <div>
-                <img src="~/testImages/543novrbKac.jpg" alt="avatar" class="img-circle" width="60" height="60" />
-                <img src="~/testImages/A-Nn65MbX1c.jpg" alt="avatar" class="img-circle" width="60" height="60" />
-                <img src="~/testImages/AKUKzxqvEkc.jpg" alt="avatar" class="img-circle" width="60" height="60" />
-                <img src="~/testImages/BR7V8izRffg.jpg" alt="avatar" class="img-circle" width="60" height="60" />
-                <img src="~/testImages/FFS4BxaIYGw.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+            <p/>
+            <div class="img-responsive img-thumbnail">
+                <div class="frame-round">
+                    <div class="crop">
+                        <img src="~/testImages/543novrbKac.jpg" alt="avatar" class="img-circle" width="60" height="60" /> 
+                    </div>
+                </div>
+                <div class="frame-round">
+                    <div class="crop">
+                        <img src="~/testImages/A-Nn65MbX1c.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+                    </div>
+                </div>
+                <div class="frame-round">
+                    <div class="crop">
+                        <img src="~/testImages/AKUKzxqvEkc.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+                    </div>
+                </div>
+                <div class="frame-round">
+                    <div class="crop">
+                        <img src="~/testImages/BR7V8izRffg.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+                    </div>
+                </div>
+                <div class="frame-round">
+                    <div class="crop">
+                        <img src="~/testImages/FFS4BxaIYGw.jpg" alt="avatar" class="img-circle" width="60" height="60" />
+                    </div>
+                </div>             
             </div>
         </div>
         <div class="col-md-7">
@@ -59,4 +130,3 @@
             </div>
         </div>
     </div>
-</div>

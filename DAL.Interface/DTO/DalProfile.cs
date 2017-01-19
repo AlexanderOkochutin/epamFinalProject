@@ -16,5 +16,6 @@ namespace DAL.Interface.DTO
         public string Gender { get; set; }
         public DateTime? BirthDay { get; set; }
         public string RelationStatus { get; set; }
+        public int AvatarId { get; set; }
     }
 }

@@ -14,5 +14,6 @@ namespace BLL.Interface.Entities
         public string Gender { get; set; }
         public DateTime? BirthDay { get; set; }
         public string RelationStatus { get; set; }
+        public int AvatarId { get; set; }
     }
 }

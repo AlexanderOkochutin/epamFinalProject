@@ -65,6 +65,7 @@ namespace DAL.Concrete
                 photo.Data = dalPhoto.Data;
                 photo.Date = dalPhoto.Date;
                 photo.MimeType = dalPhoto.MimeType;
+                photo.IsAvatar = dalPhoto.IsAvatar;
                 photo.Profile.Clear();
                 foreach (var item in dalPhoto.ProfileId)
                 {

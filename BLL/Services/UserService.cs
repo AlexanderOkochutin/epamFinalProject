@@ -7,6 +7,7 @@ using BLL.Interface.Entities;
 using BLL.Interface.Services;
 using BLL.Mappers;
 using DAL.Interface;
+using DAL.Interface.DTO;
 
 namespace BLL.Services
 {
@@ -22,12 +23,14 @@ namespace BLL.Services
         public void AddUser(BllUser user)
         {
             uow.Users.Create(user.ToDalUser());
+            uow.Profiles.Create(new DalProfile() {Id = user.Id});
             uow.Commit();
         }
 
         public void DeleteUser(BllUser user)
         {
             uow.Users.Delete(user.Id);
+            uow.Profiles.Delete(user.Id);
             uow.Commit();
         }
 

@@ -26,7 +26,8 @@ namespace MvcPL.Infrastructure.Mappers
                 BirthDay = profile.BirthDay,
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
-                FirstName = profile.FirstName
+                FirstName = profile.FirstName,
+                AvatarId = profile.AvatarId
             };
             return result;
         }
@@ -46,7 +47,8 @@ namespace MvcPL.Infrastructure.Mappers
                 BirthDay = profile.BirthDay,
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
-                FirstName = profile.FirstName
+                FirstName = profile.FirstName,
+                AvatarId = profile.AvatarId
             };
             return result;
         }

@@ -20,6 +20,7 @@ namespace ORM
         public DbSet<Message> Messages { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<FriendInvite> Invites { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

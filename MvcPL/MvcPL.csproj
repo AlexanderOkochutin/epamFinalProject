@@ -171,6 +171,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Mappers\PhotoMapper.cs" />
     <Compile Include="Infrastructure\Mappers\ProfileMapper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,7 +183,7 @@
     <Compile Include="ViewModels\RegisterModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\default-avatar.jpg" />
+    <Content Include="Content\default-avatar.jpg" />
     <Content Include="Content\bootstrap-darkly.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -260,6 +261,8 @@
     <Content Include="testImages\AKUKzxqvEkc.jpg" />
     <Content Include="testImages\BR7V8izRffg.jpg" />
     <Content Include="testImages\FFS4BxaIYGw.jpg" />
+    <None Include="Views\Profile\Edit.cshtml" />
+    <None Include="Views\Shared\_ProfilePhoto.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -281,9 +284,11 @@
     <Content Include="Views\Shared\_Home.cshtml" />
     <Content Include="Views\Profile\ComingSoon.cshtml" />
     <Content Include="Views\Shared\test.cshtml" />
+    <Content Include="Views\Shared\_AvatarChange.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -51,6 +51,7 @@ namespace MvcPL.Controllers
                     }
                     else
                     {
+                        var user = userService.GetUserByEmail(viewModel.Email);
                         return RedirectToAction("Home", "Profile");
                     }
                 }

@@ -4,18 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />    
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery-ui")
 </head>
 <body>
+
 <div class="row">
     <div class="col-md-12">
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    @Html.ActionLink("F-SOCIETY", "Home", "Profile", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("F-SOCIETY", "Home", "Profile", new {area = ""}, new {@class = "navbar-brand"})
                 </div>
-                <div class="navbar-right">@Html.ActionLink("Log out", "LogOut", "Account", new { area = "" }, new { @class = "navbar-brand" }) </div>
+                <div class="navbar-right">@Html.ActionLink("Log out", "LogOut", "Account", new {area = ""}, new {@class = "navbar-brand"}) </div>
             </div>
         </div>
     </div>
@@ -25,17 +30,19 @@
     <div class="col-md-12">
         <div class="container body-content">
             @RenderBody()
-            <hr />
-            <footer class="footer">
-                <div class="container">
-                    <p class="text-muted">Friends Society &copy; @DateTime.Now.Year</p>
-                </div>
-            </footer>
+            <hr/>
         </div>
     </div>
 </div>
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
+<div>
+    <div>
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">Friends Society &copy; @DateTime.Now.Year</p>
+            </div>
+        </footer>
+    </div>
+</div>
 @RenderSection("scripts", required: false)
 </body>
 </html>

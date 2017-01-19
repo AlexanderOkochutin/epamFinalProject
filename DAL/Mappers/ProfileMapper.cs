@@ -28,7 +28,9 @@ namespace DAL.Mappers
                 FirstName = profile.FirstName,
                 LastName = profile.LastName,
                 Gender = profile.Gender,
-                RelationStatus = profile.RelationStatus
+                RelationStatus = profile.RelationStatus,
+                AvatarId = profile.AvatarId
+                
             };
 
             return result;
@@ -49,7 +51,8 @@ namespace DAL.Mappers
                 FirstName = profile.FirstName,
                 LastName = profile.LastName,
                 Gender = profile.Gender,
-                RelationStatus = profile.RelationStatus
+                RelationStatus = profile.RelationStatus,
+                AvatarId = profile.AvatarId
             };
             return result;
         }

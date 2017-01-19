@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\InviteRepository.cs" />
     <Compile Include="Concrete\MessageRepository.cs" />
     <Compile Include="Concrete\PhotoRepository.cs" />
     <Compile Include="Concrete\ProfileRepository.cs" />

@@ -34,6 +34,7 @@ namespace DAL.Concrete
         public void Create(DalProfile dalProfile)
         {
             var profile = dalProfile.ToProfile();
+            /*
             var messages = Messages.Select(m => m).Where(m => m.ProfileFrom.Id == dalProfile.Id);
             var photos = Profiles.FirstOrDefault(p => p.Id == dalProfile.Id).Photos;
             foreach (var message in messages)
@@ -44,6 +45,8 @@ namespace DAL.Concrete
             {
                 profile.Photos.Add(photo);
             }
+            */
+            Profiles.Add(profile);
         }
 
         public void Delete(int id)
@@ -82,6 +85,7 @@ namespace DAL.Concrete
                 profile.LastName = dalProfile.LastName;
                 profile.Gender = dalProfile.Gender;
                 profile.RelationStatus = dalProfile.RelationStatus;
+                profile.AvatarId = dalProfile.AvatarId;
             }
             context.Entry(profile).State = EntityState.Modified;
         }

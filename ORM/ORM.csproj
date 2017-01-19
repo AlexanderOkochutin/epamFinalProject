@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbInitializer.cs" />
+    <Compile Include="Entities\FriendInvite.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\Profile.cs" />

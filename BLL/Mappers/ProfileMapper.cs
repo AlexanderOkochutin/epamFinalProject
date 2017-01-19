@@ -25,7 +25,8 @@ namespace BLL.Mappers
               BirthDay = profile.BirthDay,
               Gender = profile.Gender,
               RelationStatus = profile.RelationStatus,
-              FirstName = profile.FirstName
+              FirstName = profile.FirstName,
+              AvatarId = profile.AvatarId
             };
             return result;
         }
@@ -45,7 +46,8 @@ namespace BLL.Mappers
                 BirthDay = profile.BirthDay,
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
-                FirstName = profile.FirstName
+                FirstName = profile.FirstName,
+                AvatarId = profile.AvatarId
             };
             return result;
         }

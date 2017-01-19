@@ -30,5 +30,10 @@ namespace BLL.Services
             uow.Profiles.Update(profile.ToDalProfile());
             uow.Commit();
         }
+
+        public void SendFriendRecuest(int idFrom,int idTo)
+        {
+            
+        }
     }
 }

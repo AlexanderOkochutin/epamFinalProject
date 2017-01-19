@@ -26,7 +26,8 @@ namespace DAL.Mappers
                 Id = photo.Id,
                 Data = photo.Data,
                 Date = photo.Date,
-                MimeType = photo.MimeType
+                MimeType = photo.MimeType,
+                IsAvatar = photo.IsAvatar
             };
 
             return result;
@@ -45,7 +46,8 @@ namespace DAL.Mappers
                 Id = photo.Id,
                 Date = photo.Date,
                 Data = photo.Data,
-                MimeType = photo.MimeType
+                MimeType = photo.MimeType,
+                IsAvatar = photo.IsAvatar
             };
             foreach (var profile in photo.Profile)
             {
