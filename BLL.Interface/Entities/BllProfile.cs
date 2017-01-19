@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MvcPL.ViewModels
+namespace BLL.Interface.Entities
 {
-    public class ProfileModel
+    public class BllProfile
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

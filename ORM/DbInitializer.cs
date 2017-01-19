@@ -53,6 +53,7 @@ namespace ORM
                 BirthDay = new DateTime(1994,6,25),
                 RelationStatus = "Free"
             };
+            context.Set<Profile>().Add(adminProfile);
             context.SaveChanges();
         }
 

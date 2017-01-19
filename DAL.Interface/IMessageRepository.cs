@@ -9,5 +9,6 @@ namespace DAL.Interface
 {
     public interface IMessageRepository:IRepository<DalMessage>
     {
+        List<DalMessage> GetMessages(int ProfileFrom, int ProfileTo);
     }
 }

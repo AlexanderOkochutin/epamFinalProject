@@ -18,10 +18,12 @@ namespace MvcPL.Controllers
     public class AccountController : Controller
     {
         private readonly IUserService userService;
+        private readonly IProfileService profileService;
 
-        public AccountController(IUserService us)
+        public AccountController(IUserService us, IProfileService ps)
         {
             userService = us;
+            profileService = ps;
         }
 
         [HttpGet]
@@ -49,7 +51,7 @@ namespace MvcPL.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("ComingSoon", "Profile");
+                        return RedirectToAction("Home", "Profile");
                     }
                 }
                 else

@@ -171,6 +171,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Mappers\ProfileMapper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\SocialNetworkMembershipProvider.cs" />
@@ -302,6 +303,14 @@
     <ProjectReference Include="..\CryptoService\CryptoService.csproj">
       <Project>{675c409f-f471-4fae-b5d0-69f27bc27df1}</Project>
       <Name>CryptoService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL.Interface\DAL.Interface.csproj">
+      <Project>{a19203aa-460a-41c8-893c-ad54e0a8827f}</Project>
+      <Name>DAL.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{61a57b09-2370-4d76-82d9-68478b786a31}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DependencyResolver\DependencyResolver.csproj">
       <Project>{9a88d7bd-06e4-4fc0-acba-30e4c62cf8d4}</Project>

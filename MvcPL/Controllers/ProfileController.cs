@@ -3,16 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL.Interface.Services;
+using MvcPL.Infrastructure.Mappers;
+
 
 namespace MvcPL.Controllers
 {
     public class ProfileController:Controller
     {
+        private readonly IProfileService profileService;
+
+        public ProfileController(IProfileService ps)
+        {
+            profileService = ps;
+        }
 
         [Authorize]
         public ActionResult Home()
         {
-            return View();
+            var profile = profileService.Get(1);
+            return View(profile.ToViewProfileModel());
         }
 
         [Authorize]

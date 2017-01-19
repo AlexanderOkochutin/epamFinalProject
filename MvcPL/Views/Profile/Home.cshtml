@@ -1,4 +1,4 @@
-﻿@model  MvcPL.ViewModels.ProfileModel
+﻿@model MvcPL.ViewModels.ProfileModel
 @{
     Layout = "~/Views/Shared/_Home.cshtml";
 }
@@ -28,13 +28,13 @@
                 @Html.ActionLink("Change Avatar", "ChangeAvatar", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-xs"})
             </div>
             <p/>
-            <div align="center">online</div>
+            <div align="center">@Model.RelationStatus</div>
         </div>
         <div class="col-md-7">
             <div align="left">                
-                <div class="status">Alexander Okochutin</div>
-                <div>Настраиваем работу</div>
-                <div>Инфа</div>
+                <div class="status">@(@Model.LastName+@Model.LastName)</div>
+                <div>@Model.BirthDay</div>
+                <div>@Model.Gender</div>
                 @Html.ActionLink("Edit", "Edit", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-sm" })
             </div>
         </div>

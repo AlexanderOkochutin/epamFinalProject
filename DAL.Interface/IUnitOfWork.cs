@@ -12,6 +12,9 @@ namespace DAL.Interface
         /// User collection
         /// </summary>
         IUserRepository Users { get; set; }
+        IProfileRepository Profiles { get; set; }
+        IPhotoRepository Photos { get; set; }
+        IMessageRepository Messages { get; set; }
         void Commit();
         //Rollback
     }
