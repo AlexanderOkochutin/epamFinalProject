@@ -22,10 +22,10 @@
             </nav>
         </div>
         <div class="col-md-3">
-            <img src="~/testImages/A8XSTcubxjQ.jpg" alt="avatar" class="img-rounded" width="250" height="250" />
+            <img src="~/images/default-avatar.jpg" alt="avatar" class="img-rounded" width="250" height="250" />
             <p/>
             <div align="center">
-                @Html.ActionLink("Change Avatar", "ChangeAvatar", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-xs"})
+                @Html.ActionLink("Change Avatar", "ChangeAvatar", "Profile", null, htmlAttributes: new {@class = "btn btn-default btn-xs"})
             </div>
             <p/>
             <div align="center">@Model.RelationStatus</div>

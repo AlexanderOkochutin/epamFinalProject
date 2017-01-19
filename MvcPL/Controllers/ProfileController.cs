@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using BLL.Interface.Services;
 using MvcPL.Infrastructure.Mappers;
+using MvcPL.ViewModels;
 
 
 namespace MvcPL.Controllers
 {
-    public class ProfileController:Controller
+    public class ProfileController : Controller
     {
         private readonly IProfileService profileService;
 
@@ -59,6 +60,17 @@ namespace MvcPL.Controllers
         public ActionResult ChangeAvatar()
         {
             throw new NotImplementedException();
+        }
+
+        private void SetProfileImage(PhotoModel photo, HttpPostedFileBase fileUpload)
+        {
+            if (!ReferenceEquals(fileUpload, null))
+            {
+                photo.Data = new byte[fileUpload.ContentLength];
+                fileUpload.InputStream.Read(photo.Data, 0, fileUpload.ContentLength);
+                photo.MimeType = fileUpload.ContentType;
+            }
+
         }
     }
 }
