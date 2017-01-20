@@ -26,7 +26,9 @@ namespace BLL.Mappers
               Gender = profile.Gender,
               RelationStatus = profile.RelationStatus,
               FirstName = profile.FirstName,
-              AvatarId = profile.AvatarId
+              AvatarId = profile.AvatarId,
+              IsNewInvites = profile.IsNewInvites,
+              Friends = profile.Friends
             };
             return result;
         }
@@ -47,7 +49,9 @@ namespace BLL.Mappers
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
                 FirstName = profile.FirstName,
-                AvatarId = profile.AvatarId
+                AvatarId = profile.AvatarId,
+                IsNewInvites = profile.IsNewInvites,
+                Friends = profile.Friends
             };
             return result;
         }

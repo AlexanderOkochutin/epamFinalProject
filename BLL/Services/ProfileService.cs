@@ -31,9 +31,30 @@ namespace BLL.Services
             uow.Commit();
         }
 
-        public void SendFriendRecuest(int idFrom,int idTo)
+        public void SendRequest(int idFrom,int idTo)
         {
-            
+           DalInvite invite = new DalInvite()
+           {
+                IdFrom = idFrom,
+                IdTo = idTo,
+                Response = null
+           };
+            uow.Invites.Create(invite);
+            var profileTo = uow.Profiles.Get(idTo);
+            profileTo.IsNewInvites = true;
+            uow.Profiles.Update(profileTo);
+            uow.Commit();
+        }
+
+        public void AddFriend(int userId,int friendId)
+        {
+            var user = uow.Profiles.Get(userId);
+            var friend = uow.Profiles.Get(friendId);
+            user.Friends.Add(friendId);
+            friend.Friends.Add(userId);
+            uow.Profiles.Update(user);
+            uow.Profiles.Update(friend);
+            uow.Commit();
         }
     }
 }

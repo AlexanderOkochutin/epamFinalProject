@@ -15,6 +15,7 @@ namespace DAL.Interface
         IProfileRepository Profiles { get; set; }
         IPhotoRepository Photos { get; set; }
         IMessageRepository Messages { get; set; }
+        IInviteRepository Invites { get; set; }
         void Commit();
         //Rollback
     }

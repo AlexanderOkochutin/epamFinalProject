@@ -86,6 +86,12 @@ namespace DAL.Concrete
                 profile.Gender = dalProfile.Gender;
                 profile.RelationStatus = dalProfile.RelationStatus;
                 profile.AvatarId = dalProfile.AvatarId;
+                profile.IsNewInvites = dalProfile.IsNewInvites;
+            }
+            foreach (var id in dalProfile.Friends)
+            {
+                var temp = Profiles.FirstOrDefault(p=>p.Id==id);
+                profile.Friends.Add(temp);
             }
             context.Entry(profile).State = EntityState.Modified;
         }

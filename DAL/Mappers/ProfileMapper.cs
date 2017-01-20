@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,8 @@ namespace DAL.Mappers
                 LastName = profile.LastName,
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
-                AvatarId = profile.AvatarId
+                AvatarId = profile.AvatarId,
+                IsNewInvites = profile.IsNewInvites
                 
             };
 
@@ -52,8 +54,14 @@ namespace DAL.Mappers
                 LastName = profile.LastName,
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
-                AvatarId = profile.AvatarId
+                AvatarId = profile.AvatarId,
+                IsNewInvites = profile.IsNewInvites
             };
+
+            foreach (var friend in profile.Friends)
+            {
+                result.Friends.Add(friend.Id);
+            }
             return result;
         }
 

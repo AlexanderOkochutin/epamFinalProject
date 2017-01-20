@@ -23,6 +23,7 @@ namespace ORM.Entities
         public DateTime? BirthDay { get; set; }
         public string RelationStatus { get; set; }
         public int AvatarId { get; set; }
+        public bool IsNewInvites { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Profile> Friends { get; set; }

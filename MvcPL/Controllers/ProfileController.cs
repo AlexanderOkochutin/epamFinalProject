@@ -40,7 +40,8 @@ namespace MvcPL.Controllers
         [Authorize]
         public ActionResult Message()
         {
-            throw new NotImplementedException();
+            profileService.AddFriend(1,2);
+            return RedirectToAction("Home", "Profile");
         }
 
         [Authorize]
@@ -67,7 +68,8 @@ namespace MvcPL.Controllers
         [Authorize]
         public ActionResult Friends()
         {
-            throw new NotImplementedException();
+            profileService.SendRequest(1,2);
+           return  RedirectToAction("Home", "Profile");
         }
 
         [Authorize]

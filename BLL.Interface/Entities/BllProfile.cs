@@ -8,6 +8,10 @@ namespace BLL.Interface.Entities
 {
     public class BllProfile
     {
+        public BllProfile()
+        {
+            Friends = new HashSet<int>();
+        }
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -15,5 +19,7 @@ namespace BLL.Interface.Entities
         public DateTime? BirthDay { get; set; }
         public string RelationStatus { get; set; }
         public int AvatarId { get; set; }
+        public bool IsNewInvites { get; set; }
+        public ICollection<int> Friends { get; set; }
     }
 }

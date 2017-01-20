@@ -40,6 +40,7 @@ namespace DependencyResolver
             kernel.Bind<IPhotoRepository>().To<PhotoRepository>();
             kernel.Bind<IProfileService>().To<ProfileService>();
             kernel.Bind<IPhotoService>().To<PhotoService>();
+            kernel.Bind<IInviteRepository>().To<InviteRepository>();
         }
     }
 }
