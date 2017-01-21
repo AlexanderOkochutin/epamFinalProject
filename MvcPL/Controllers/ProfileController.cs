@@ -49,6 +49,7 @@ namespace MvcPL.Controllers
                 return View(profile.ToViewProfileModel());
             }
         }
+
         [Authorize]
         public ActionResult ComingSoon()
         {

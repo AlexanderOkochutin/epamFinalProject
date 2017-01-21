@@ -65,7 +65,7 @@ namespace DAL.Concrete
         public List<DalMessage> GetMessages(int ProfileFrom, int ProfileTo)
         {
             return
-                Messages.Where(m => (m.ProfileFrom.Id == ProfileFrom && m.ProfileTo.Id == ProfileTo))
+                Messages.Where(m => (m.ProfileFrom.Id == ProfileFrom && m.ProfileTo.Id == ProfileTo) || (m.ProfileFrom.Id == ProfileTo && m.ProfileTo.Id == ProfileFrom))
                     .OrderBy(m => m.Date)
                     .Map().ToList();
         }

@@ -70,7 +70,7 @@
         <div class="col-md-2">
             <nav id="nav">
                 <ul>
-                    <li>@Html.ActionLink(" Messages", "Message", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
+                    <li>@Html.ActionLink("Send Message", "SendMessage", "Message", new {id = Model.Id}, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
                     <li>@Html.ActionLink("Photos", "Photo", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
                 </ul>
             </nav>

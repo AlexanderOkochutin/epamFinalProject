@@ -1,0 +1,42 @@
+﻿@model MvcPL.ViewModels.SendMessageModel
+  @foreach (var m in Model.Messages)
+  {
+      if (m.ProfileIdFrom == Model.I.Id)
+      {
+          <div class="row">
+              <div class="mailfrom">
+                  <div class="col-md-2">
+                      <div class="frame-round">
+                          <div class="crop">
+                              <img src="@Url.Action("GetImage", "Profile" , new {id=Model.I.Id})" alt="I am" class="img-circle" width="90" height="90" />
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-10">
+                      <div align="left" class="verticalAlighn">
+                          @m.Text
+                      </div>
+                  </div>                  
+              </div>
+          </div>
+      }
+      else
+      {
+          <div class="row">
+              <div class="mailto">
+                  <div class="col-md-10">
+                      <div align="right" class="verticalAlighn">
+                          @m.Text
+                      </div>
+                  </div>
+                  <div class="col-md-2">
+                      <div class="frame-round">
+                          <div class="crop">
+                              <img src="@Url.Action("GetImage", "Profile" , new {id=Model.Companion.Id})" alt="I am" class="img-circle" width="90" height="90" />
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    }
+    }

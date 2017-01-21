@@ -38,8 +38,8 @@
                     </dd>
                 </dl>
             </td>
-            <td>
-                <span id="@profile.Id-accf">
+            <td id="@profile.Id-accf">
+                <span>
                     @Ajax.RouteLink("Accept", "AcceptFriend", new { id = profile.Id }, new AjaxOptions { UpdateTargetId = profile.Id.ToString() + "-accf", InsertionMode = InsertionMode.ReplaceWith }, htmlAttributes: new { @class = "btn btn-default btn-sm" })
                 </span>
                 <span id="@profile.Id-reff">
