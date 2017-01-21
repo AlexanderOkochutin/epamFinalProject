@@ -87,6 +87,7 @@ namespace DAL.Concrete
                 profile.RelationStatus = dalProfile.RelationStatus;
                 profile.AvatarId = dalProfile.AvatarId;
                 profile.IsNewInvites = dalProfile.IsNewInvites;
+                profile.City = dalProfile.City;
             }
             foreach (var id in dalProfile.Friends)
             {

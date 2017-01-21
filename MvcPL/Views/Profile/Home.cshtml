@@ -63,9 +63,16 @@
         <div class="col-md-2">
             <nav id="nav">
                 <ul>
-                    <li>@Html.ActionLink("Messages", "Message", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
-                    <li>@Html.ActionLink("Friends", "Friends", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
+                    <li>@Html.ActionLink(" Messages", "Message", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
                     <li>@Html.ActionLink("Photos", "Photo", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
+                    @if (Model.IsNewInvite)
+                    {
+                        <li>@Html.ActionLink("Friends", "Friends", "Profile", null, htmlAttributes: new {@class = "btn btn-warning btn-block"})</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Friends", "Friends", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
+                    }
                 </ul>
             </nav>
         </div>
@@ -80,12 +87,23 @@
             <div align="center">@Model.RelationStatus</div>
         </div>
         <div class="col-md-7">
-            <div align="left">
-                <div class="status">@(@Model.LastName + @Model.FirstName)</div>
-                <div>@Model.BirthDay</div>
-                <div>@Model.Gender</div>
-                @Html.ActionLink("Edit", "Edit", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-sm" })
+            <div class="col-md-3">
+                <div align="left">
+                    <div class="status">User name:</div>
+                    <div>Birthday:</div>
+                    <div>Gender:</div>
+                    <div>City:</div>
+                    @Html.ActionLink("Edit", "Edit", "Profile", null, htmlAttributes: new {@class = "btn btn-default btn-sm"})            
+                </div>
             </div>
+            <div class="col-md-9">
+                <div align="left">
+                    <div class="status">@(@Model.LastName + " " + @Model.FirstName)</div>
+                    <div>@Model.BirthDay</div>
+                    <div>@Model.Gender</div>
+                    <div>@Model.City</div>
+                </div>
+            </div>         
         </div>
     </div>
 </div>
@@ -94,39 +112,24 @@
         <div class="col-md-2">           
         </div>
         <div class="col-md-3">
-            <div>Друзья</div>
+            <div>Friends</div>
             <p/>
             <div class="img-responsive img-thumbnail">
-                <div class="frame-round">
-                    <div class="crop">
-                        <img src="~/testImages/543novrbKac.jpg" alt="avatar" class="img-circle" width="60" height="60" /> 
-                    </div>
-                </div>
-                <div class="frame-round">
-                    <div class="crop">
-                        <img src="~/testImages/A-Nn65MbX1c.jpg" alt="avatar" class="img-circle" width="60" height="60" />
-                    </div>
-                </div>
-                <div class="frame-round">
-                    <div class="crop">
-                        <img src="~/testImages/AKUKzxqvEkc.jpg" alt="avatar" class="img-circle" width="60" height="60" />
-                    </div>
-                </div>
-                <div class="frame-round">
-                    <div class="crop">
-                        <img src="~/testImages/BR7V8izRffg.jpg" alt="avatar" class="img-circle" width="60" height="60" />
-                    </div>
-                </div>
-                <div class="frame-round">
-                    <div class="crop">
-                        <img src="~/testImages/FFS4BxaIYGw.jpg" alt="avatar" class="img-circle" width="60" height="60" />
-                    </div>
-                </div>             
-            </div>
+                @foreach (var friend in Model.Friends)
+                {
+                    <a href="@Url.Action("UserProfile","Profile",new {id=friend})">
+                        <div class="frame-round">
+                            <div class="crop">
+                                @Html.Partial("_ProfilePhoto", friend);
+                            </div>
+                        </div>
+                    </a>
+                }
+        </div>
         </div>
         <div class="col-md-7">
             <div align="center">
-                <h1>Стена</h1>
+                <h1>Post wall</h1>
             </div>
         </div>
     </div>

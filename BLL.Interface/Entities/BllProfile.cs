@@ -21,5 +21,6 @@ namespace BLL.Interface.Entities
         public int AvatarId { get; set; }
         public bool IsNewInvites { get; set; }
         public ICollection<int> Friends { get; set; }
+        public string City { get; set; }
     }
 }

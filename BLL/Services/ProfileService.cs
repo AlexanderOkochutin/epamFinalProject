@@ -46,15 +46,44 @@ namespace BLL.Services
             uow.Commit();
         }
 
+        public IList<BllProfile> GetAllRequests(int id)
+        {
+            var invites = uow.Invites.GetAll().Where(i=>i.IdTo==id).Select(i=>i);
+            IList<BllProfile> result = new List<BllProfile>();
+            foreach (var invite in invites)
+            {
+                var profile = uow.Profiles.Get(invite.IdFrom);
+                result.Add(profile.ToBllProfile());
+            }
+            return result;
+        }
+
         public void AddFriend(int userId,int friendId)
         {
             var user = uow.Profiles.Get(userId);
             var friend = uow.Profiles.Get(friendId);
+            var invite = uow.Invites.GetConcreteInvite(friendId, userId);
+            uow.Invites.Delete(invite.Id);
             user.Friends.Add(friendId);
             friend.Friends.Add(userId);
             uow.Profiles.Update(user);
             uow.Profiles.Update(friend);
             uow.Commit();
+        }
+
+        /// <summary>
+        /// The method for profile searching
+        /// </summary>
+        /// <param name="stringKey"></param>
+        /// <param name="city"></param>
+        /// <returns></returns>
+        public IEnumerable<BllProfile> Find(string stringKey = "", string city = null)
+        {
+            var profiles = uow.Profiles.GetAll();
+            if (!ReferenceEquals(stringKey, null)) profiles = profiles.Where(p => (p.FirstName + " " + p.LastName).Contains(stringKey));
+            if (!ReferenceEquals(city, null)) profiles = profiles.Where(p => p.City != null && p.City.Contains(city));
+
+            return ProfileMapper.Map(profiles);
         }
     }
 }

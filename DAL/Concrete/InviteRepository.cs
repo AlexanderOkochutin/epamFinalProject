@@ -57,7 +57,33 @@ namespace DAL.Concrete
 
         public IEnumerable<DalInvite> GetAll()
         {
-            throw new NotImplementedException();
+            IList<DalInvite> result = new List<DalInvite>();
+            var invites = Invites.Select(i => i);
+            foreach (var invite in invites)
+            {
+                var temp = new DalInvite()
+                {
+                    Id = invite.Id,
+                    Response = invite.Response,
+                    IdFrom = invite.FromProfile.Id,
+                    IdTo = invite.ToProfile.Id
+                };
+                result.Add(temp);
+            }
+            return result;
+        }
+
+        public DalInvite GetConcreteInvite(int idFrom, int idTo)
+        {
+            var invite = Invites.FirstOrDefault(i => i.FromProfile.Id == idFrom&& i.ToProfile.Id==idTo);
+            DalInvite result = new DalInvite()
+            {
+                Id = invite.Id,
+                Response = invite.Response,
+                IdFrom = invite.FromProfile.Id,
+                IdTo = invite.ToProfile.Id
+            };
+            return result;
         }
 
         public DalInvite GetByPredicate(Expression<Func<DalInvite, bool>> f)

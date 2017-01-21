@@ -1,0 +1,134 @@
+﻿@model MvcPL.ViewModels.ProfileModel
+@{
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+<style>
+    .topMargin {
+        margin-top: 3%;
+    }
+
+    .status {
+        font-size: x-large;
+    }
+
+    .frame-square {
+        background: #00bc8c;
+        ;
+        border: 2px solid #000;
+        display: inline-block;
+        vertical-align: top;
+        padding: 5px;
+        width: 250px;
+        height: 250px;
+        margin-right: .5em;
+        margin-bottom: .3em;
+    }
+
+    .frame-round {
+        background: #00bc8c;
+        ;
+        border: 2px solid #000;
+        display: inline-block;
+        vertical-align: top;
+        padding: 2px;
+        width: 60px;
+        height: 60px;
+        margin-right: .5em;
+        margin-bottom: .3em;
+    }
+
+    .frame-round {
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+        .frame-round .crop {
+            border-radius: 50%;
+        }
+
+    .crop {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+        .crop img {
+            display: block;
+            min-width: 100%;
+            min-height: 100%;
+            margin: auto;
+            position: absolute;
+            top: -100%;
+            right: -100%;
+            bottom: -100%;
+            left: -100%;
+        }
+</style>
+
+<div class="container-fluid topMargin">
+    <div class="row ">
+        <div class="col-md-2">
+            <nav id="nav">
+                <ul>
+                    <li>@Html.ActionLink(" Messages", "Message", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
+                    <li>@Html.ActionLink("Photos", "Photo", "Profile", null, htmlAttributes: new { @class = "btn btn-default btn-block" })</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-3">
+            <div align="center">
+                <div class="frame-square img-rounded">
+                    <div class="crop">
+                        @Html.Partial("_ProfilePhoto", Model.Id)
+                    </div>
+                </div>
+            </div>
+            <div align="center">@Model.RelationStatus</div>
+        </div>
+        <div class="col-md-7">
+            <div class="col-md-3">
+                <div align="left">
+                    <div class="status">User name:</div>
+                    <div>Birthday:</div>
+                    <div>Gender:</div>
+                    <div>City:</div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div align="left">
+                    <div class="status">@(@Model.LastName + " " + @Model.FirstName)</div>
+                    <div>@Model.BirthDay</div>
+                    <div>@Model.Gender</div>
+                    <div>@Model.City</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row topMargin">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-3">
+        <div>Friends</div>
+        <p />
+        <div class="img-responsive img-thumbnail">
+            @foreach (var friend in Model.Friends)
+            {
+                <a href="@Url.Action("UserProfile","Profile",new {id=friend})">
+                    <div class="frame-round">
+                        <div class="crop">
+                            @Html.Partial("_ProfilePhoto", friend);
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+
+    </div>
+    <div class="col-md-7">
+        <div align="center">
+            <h1>Стена</h1>
+        </div>
+    </div>
+</div>

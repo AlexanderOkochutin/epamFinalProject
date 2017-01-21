@@ -9,6 +9,11 @@ namespace MvcPL.ViewModels
 {
     public class ProfileModel
     {
+
+        public ProfileModel()
+        {
+            Friends = new List<int>();
+        }
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
@@ -32,7 +37,16 @@ namespace MvcPL.ViewModels
         [Display(Name = "Relationship status")]
         public string RelationStatus { get; set; }
 
+        /// <summary>
+        /// user status
+        /// </summary>
+        [Display(Name = "City")]
+        [StringLength(128, ErrorMessage = "Max length - {0} symbols")]
+        public string City { get; set; }
 
         public int AvatarId { get; set; }
+
+        public ICollection<int> Friends { get; set; }
+        public bool IsNewInvite { get; set; }
     }
 }

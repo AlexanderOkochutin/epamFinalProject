@@ -10,6 +10,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 </head>
 <body>
 
@@ -20,7 +21,8 @@
                 <div class="navbar-header">
                     @Html.ActionLink("F-SOCIETY", "Home", "Profile", new {area = ""}, new {@class = "navbar-brand"})
                 </div>
-                <div class="navbar-right">@Html.ActionLink("Log out", "LogOut", "Account", new {area = ""}, new {@class = "navbar-brand"}) </div>
+                <div class="navbar-right">@Html.ActionLink("Logout", "LogOut", "Account", new {area = ""}, new {@class = "navbar-brand" }) </div>
+                <div class="navbar-right">@Html.ActionLink("Search ", "Index", "Search", new { area = "" }, new { @class = "navbar-brand"}) </div>
             </div>
         </div>
     </div>

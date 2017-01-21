@@ -28,7 +28,8 @@ namespace BLL.Mappers
               FirstName = profile.FirstName,
               AvatarId = profile.AvatarId,
               IsNewInvites = profile.IsNewInvites,
-              Friends = profile.Friends
+              Friends = profile.Friends,
+              City = profile.City
             };
             return result;
         }
@@ -51,7 +52,8 @@ namespace BLL.Mappers
                 FirstName = profile.FirstName,
                 AvatarId = profile.AvatarId,
                 IsNewInvites = profile.IsNewInvites,
-                Friends = profile.Friends
+                Friends = profile.Friends,
+                City = profile.City
             };
             return result;
         }

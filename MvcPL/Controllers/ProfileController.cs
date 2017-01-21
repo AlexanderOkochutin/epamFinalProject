@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BLL.Interface.Services;
 using MvcPL.Infrastructure.Mappers;
 using MvcPL.ViewModels;
+using Ninject.Infrastructure.Language;
 
 
 namespace MvcPL.Controllers
@@ -27,10 +28,27 @@ namespace MvcPL.Controllers
         public ActionResult Home()
         {
             var user = userService.GetUserByEmail(HttpContext.User.Identity.Name);
+            if (user == null) return RedirectToAction("Login", "Account");
             var profile = profileService.Get(user.Id);
             return View(profile.ToViewProfileModel());
         }
 
+
+        [Authorize]
+        [Route("User", Name = "User")]
+        public ActionResult UserProfile(int id)
+        {
+            var user = userService.GetUserByEmail(HttpContext.User.Identity.Name);
+            var profile = profileService.Get(id);
+            if (user.Id == id)
+            {
+                return RedirectToAction("Home");
+            }
+            else
+            {
+                return View(profile.ToViewProfileModel());
+            }
+        }
         [Authorize]
         public ActionResult ComingSoon()
         {
@@ -42,6 +60,37 @@ namespace MvcPL.Controllers
         {
             profileService.AddFriend(1,2);
             return RedirectToAction("Home", "Profile");
+        }
+
+        [Authorize]
+        public ActionResult Friends()
+        {
+            var user = userService.GetUserByEmail(HttpContext.User.Identity.Name);
+            var requests = profileService.GetAllRequests(user.Id);
+            return View(ProfileMapper.Map(requests));
+        }
+
+        [Authorize]
+        [Route("AcceptFriend", Name = "AcceptFriend")]
+        public ActionResult AcceptFriend(int id)
+        {
+            var user = userService.GetUserByEmail(HttpContext.User.Identity.Name);
+            profileService.AddFriend(user.Id,id);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("__AcceptFriend");
+            }
+            else
+            {
+                return RedirectToAction("Home");
+            }
+        }
+
+        [Authorize]
+        [Route("RefuseFriend", Name = "RefuseFriend")]
+        public ActionResult RefuseFriend()
+        {
+            throw new NotImplementedException();
         }
 
         [Authorize]
@@ -66,10 +115,16 @@ namespace MvcPL.Controllers
         }
 
         [Authorize]
-        public ActionResult Friends()
+        [Route("Request",Name = "Request")]
+        public ActionResult SendFriendRequest(int id)
         {
-            profileService.SendRequest(1,2);
-           return  RedirectToAction("Home", "Profile");
+            var user = userService.GetUserByEmail(HttpContext.User.Identity.Name);
+            profileService.SendRequest(user.Id,id);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_RequestSend");
+            }
+            return RedirectToAction("Home");
         }
 
         [Authorize]

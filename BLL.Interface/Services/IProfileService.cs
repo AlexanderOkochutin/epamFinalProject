@@ -15,5 +15,7 @@ namespace BLL.Interface.Services
         void Update(BllProfile profile);
         void SendRequest(int idFrom, int idTo);
         void AddFriend(int userId,int friendId );
+        IEnumerable<BllProfile> Find(string stringKey = "", string city = null);
+        IList<BllProfile> GetAllRequests(int id);
     }
 }

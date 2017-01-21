@@ -31,8 +31,9 @@ namespace DAL.Mappers
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
                 AvatarId = profile.AvatarId,
-                IsNewInvites = profile.IsNewInvites
-                
+                IsNewInvites = profile.IsNewInvites,
+                City = profile.City
+
             };
 
             return result;
@@ -55,7 +56,8 @@ namespace DAL.Mappers
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
                 AvatarId = profile.AvatarId,
-                IsNewInvites = profile.IsNewInvites
+                IsNewInvites = profile.IsNewInvites,
+                City = profile.City
             };
 
             foreach (var friend in profile.Friends)

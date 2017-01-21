@@ -1,0 +1,135 @@
+﻿
+@using MvcPL.Infrastructure
+@model MvcPL.ViewModels.SearchModel
+<style>
+    .topMargin {
+        margin-top: 3%;
+    }
+         .frame-round {
+      background: #00bc8c;;
+      border: 2px solid #000;
+      display: inline-block;
+      vertical-align: top;
+      padding: 2px;
+      width: 90px;
+      height: 90px;
+      margin-right: .5em;
+      margin-bottom: .3em;
+    }
+
+    .frame-round {
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .frame-round .crop {
+      border-radius: 50%;
+    }
+
+    .crop {
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .crop img {
+      display: block;
+      min-width: 100%;
+      min-height: 100%;
+      margin: auto;
+      position: absolute;
+      top: -100%;
+      right: -100%;
+      bottom: -100%;
+      left: -100%;
+    }
+</style>
+<div id="results" class="topMargin">
+    @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "results" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.StringKey, new { htmlAttributes = new { id = "stringKey", @class = "form-control col-xs-3", placeholder = "Enter Name" } })
+                        @Html.ValidationMessageFor(model => model.StringKey, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { id = "city", @class = "form-control col-xs-3", placeholder = "Enter City" } })
+                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        if (!ReferenceEquals(Model, null))
+        {
+            <table class="table table-striped col-md-5">
+                @for (int i = 0; i < Model.Profiles.Entities.Count; i++)
+                {
+                    <tr>
+                        <td class="col-xs-3">
+                            <div class="frame-round">
+                                <div class="crop">
+                                    <img src="@Url.Action("GetImage", "Profile", new {id = Model.Profiles.Entities[i].Id})" alt="I am" class="img-circle" width="90" height="90" />
+                                </div>
+                            </div>                           
+                        </td>
+                        <td>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Last Name:
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => Model.Profiles.Entities[i].LastName)
+                                </dd>
+                                <dt>
+                                    First name:
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => Model.Profiles.Entities[i].FirstName)
+                                </dd>
+                                <dt>
+                                    City:
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => Model.Profiles.Entities[i].City)
+                                </dd>
+                                <dd>
+                                    @Html.RouteLink("Go to the profile page","User",new { id = Model.Profiles.Entities[i].Id })
+                                </dd>
+                            </dl>
+                        </td>
+                        <td>
+                            <span id="@Model.Profiles.Entities[i].Id-addf">
+                                @Ajax.RouteLink("Add friend", "Request", new {id = Model.Profiles.Entities[i].Id}, new AjaxOptions {UpdateTargetId = Model.Profiles.Entities[i].Id.ToString() + "-addf", InsertionMode = InsertionMode.ReplaceWith}, htmlAttributes: new {@class = "btn btn-default btn-sm"})
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="btn-group">
+                @Html.PageSubmit(Model.Profiles.Pagination)
+            </div>
+        }
+    }
+</div>
+<script>
+        $("input#stringKey").autocomplete({
+            source: '@Url.Action("FindProfiles")',
+            minLength: 1
+        });
+        $("input#city").autocomplete({
+            source: function (request, response) {
+                jQuery.getJSON(
+                   "http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
+                   function (data) {
+                       response(data);
+                   }
+                );
+            },
+            minLength: 2
+        });
+</script>

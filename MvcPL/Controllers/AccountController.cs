@@ -52,7 +52,14 @@ namespace MvcPL.Controllers
                     else
                     {
                         var user = userService.GetUserByEmail(viewModel.Email);
-                        return RedirectToAction("Home", "Profile");
+                        if (user.IsEmailConfirmed)
+                        {
+                            return RedirectToAction("Home", "Profile");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Email is not confurmed");
+                        }
                     }
                 }
                 else

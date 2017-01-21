@@ -22,6 +22,7 @@ namespace DAL.Interface.DTO
         public string RelationStatus { get; set; }
         public int AvatarId { get; set; }
         public bool IsNewInvites { get; set; }
+        public string City { get; set; }
         public ICollection<int> Friends { get; set; }
     }
 }

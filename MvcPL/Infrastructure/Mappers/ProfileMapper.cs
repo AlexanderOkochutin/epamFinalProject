@@ -27,7 +27,10 @@ namespace MvcPL.Infrastructure.Mappers
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
                 FirstName = profile.FirstName,
-                AvatarId = profile.AvatarId
+                AvatarId = profile.AvatarId,
+                City = profile.City,
+                Friends = profile.Friends,
+                IsNewInvite = profile.IsNewInvites
             };
             return result;
         }
@@ -48,7 +51,10 @@ namespace MvcPL.Infrastructure.Mappers
                 Gender = profile.Gender,
                 RelationStatus = profile.RelationStatus,
                 FirstName = profile.FirstName,
-                AvatarId = profile.AvatarId
+                AvatarId = profile.AvatarId,
+                City = profile.City,
+                Friends = profile.Friends,
+                IsNewInvites = profile.IsNewInvite
             };
             return result;
         }
