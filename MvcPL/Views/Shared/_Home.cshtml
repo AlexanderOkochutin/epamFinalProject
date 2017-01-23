@@ -11,6 +11,21 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jquery-ui")
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Scripts/jquery.signalR-2.2.1.min.js")
+    <script type="text/javascript">
+    $(function () {
+
+        var notificationhub = $.connection.notificationHub;
+
+        notificationhub.client.displayMessage = function (message) {
+
+            $('#notification').html(message);
+        };
+
+        $.connection.hub.start();
+
+    });
+    </script>
     <style>
         .topMargin {
             margin-top: 3%;

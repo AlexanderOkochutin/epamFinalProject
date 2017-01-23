@@ -1,11 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(SocialNetwork.Startup))]
-
-namespace SocialNetwork
+[assembly: OwinStartup(typeof(MvcPL.Startup))]
+namespace MvcPL
 {
     public class Startup
     {

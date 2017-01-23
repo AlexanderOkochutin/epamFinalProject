@@ -197,6 +197,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Infrastructure\Mappers\PhotoMapper.cs" />
     <Compile Include="Infrastructure\Mappers\ProfileMapper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
@@ -333,7 +334,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Hubs\" />
     <Folder Include="images\" />
     <Folder Include="Models\" />
   </ItemGroup>
@@ -369,6 +369,9 @@
       <Project>{9a88d7bd-06e4-4fc0-acba-30e4c62cf8d4}</Project>
       <Name>DependencyResolver</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

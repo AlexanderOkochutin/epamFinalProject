@@ -53,28 +53,48 @@
     </div>
 </div>
     
-    <div class="row topMargin">
-        <div class="col-md-2">           
-        </div>
-        <div class="col-md-3">
-            <div>Friends</div>
-            <p/>
-            <div class="img-responsive img-thumbnail">
-                @foreach (var friend in Model.Friends)
-                {
-                    <a href="@Url.Action("UserProfile","Profile",new {id=friend})">
-                        <div class="frame-round">
-                            <div class="crop">
-                                @Html.Partial("_ProfilePhoto", friend);
-                            </div>
+<div class="row topMargin">
+    <div class="col-md-2">           
+    </div>
+    <div class="col-md-3">
+        <div>Friends</div>
+        <p/>
+        <div class="img-responsive img-thumbnail">
+            @foreach (var friend in Model.Friends)
+            {
+                <a href="@Url.Action("UserProfile","Profile",new {id=friend})">
+                    <div class="frame-round">
+                        <div class="crop">
+                            @Html.Partial("_ProfilePhoto", friend);
                         </div>
-                    </a>
-                }
-        </div>
-        </div>
-        <div class="col-md-7">
-            <div align="center">
-                <h1>Post wall</h1>
-            </div>
+                    </div>
+                </a>
+            }
         </div>
     </div>
+    <div class="col-md-7">
+        <div align="center">
+            <h1>Post wall</h1>
+        </div>
+    </div>
+    <div><span id="notification" style="color:red;font-size:15px;"></span></div>
+</div>
+
+<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+<script src="~/signalr/hubs"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        var notificationhub = $.connection.notificationHub;
+
+        notificationhub.client.displayMessage = function (message) {
+
+            $('#notification').html(message);
+        };
+
+        $.connection.hub.start();
+
+    });
+</script>

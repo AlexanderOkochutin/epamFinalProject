@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using BLL.Interface.Entities;
 using BLL.Interface.Services;
+using MvcPL.Hubs;
 using MvcPL.Infrastructure.Mappers;
 using MvcPL.ViewModels;
 
@@ -40,6 +41,8 @@ namespace MvcPL.Controllers
                     Text = chatMessage
                 });
             }
+            var context = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+            var t = context.Clients.All;
             var messages = messageService.GetMessages(myUser.Id, id);         
             var viewModel = new SendMessageModel()
             {
